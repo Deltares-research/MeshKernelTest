@@ -159,7 +159,7 @@ double BilinearInterpolationOnGriddedSamples::GetFractionalNumberOfRows(const Po
         if (point.y >= m_yCoordinates[i] && point.y < m_yCoordinates[i + 1])
         {
             const double dy = m_yCoordinates[i + 1] - m_yCoordinates[i];
-            result = (point.y - m_xCoordinates[i]) / dy;
+            result = (point.y - m_yCoordinates[i]) / dy;
             break;
         }
     }
