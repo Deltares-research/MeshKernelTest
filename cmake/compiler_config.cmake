@@ -13,7 +13,7 @@ if (UNIX)
   if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options("-fvisibility=hidden;-Werror;-Wall;-Wextra;-pedantic;-Wno-unused-function")
     if(APPLE)
-      add_compile_options("-Xlinker -ld_classic")
+      add_link_options("-Xlinker -ld_classic")
       if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
         # CMake automatically sets -Xarch_arm64 (for clang) but gcc doesn't support it
         unset(_CMAKE_APPLE_ARCHS_DEFAULT)
