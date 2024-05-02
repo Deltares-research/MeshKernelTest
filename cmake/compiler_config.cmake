@@ -12,13 +12,16 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 if (UNIX)
   if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options("-fvisibility=hidden;-Werror;-Wall;-Wextra;-pedantic;-Wno-unused-function")
-    if(APPLE AND (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64"))
-      # CMake automatically sets -Xarch_arm64 (for clang) but gcc doesn't support it
-      unset(_CMAKE_APPLE_ARCHS_DEFAULT)
-      # Be lenient on macos with arm64 toolchain to prevent Eigen -Werror=deprecated-enum-enum-conversion error
-      add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-deprecated-enum-enum-conversion>)
-      # Suppress notes related to ABI changes
-      add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-psabi>)
+    if(APPLE)
+      add_compile_options("-Xlinker -ld_classic")
+      if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
+        # CMake automatically sets -Xarch_arm64 (for clang) but gcc doesn't support it
+        unset(_CMAKE_APPLE_ARCHS_DEFAULT)
+        # Be lenient on macos with arm64 toolchain to prevent Eigen -Werror=deprecated-enum-enum-conversion error
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-deprecated-enum-enum-conversion>)
+        # Suppress notes related to ABI changes
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-psabi>)
+      endif()
     endif()
     add_compile_options("$<$<CONFIG:RELEASE>:-O2>")
     add_compile_options("$<$<CONFIG:DEBUG>:-g>")
