@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
 
+set(MESHKERNEL_VERSION 4.3.2)
+
 project(
   MeshKernel
-  VERSION 4.3.2
+  VERSION ${MESHKERNEL_VERSION}
   DESCRIPTION "Library for creating and editing meshes."
   LANGUAGES CXX C
 )
