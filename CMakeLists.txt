@@ -1,15 +1,8 @@
 cmake_minimum_required(VERSION 3.23)
 
-# get version from latest git tag (stored in VERSION_STRING_BASE)
-include(cmake/get_version_from_git.cmake)
-get_version_from_git(
-  LOG OFF
-  TIMESTAMP "%Y%m%d%H%M%S"
-)
-
 project(
   MeshKernel
-  VERSION ${VERSION_STRING_BASE}
+  VERSION 4.3.2
   DESCRIPTION "Library for creating and editing meshes."
   LANGUAGES CXX C
 )
